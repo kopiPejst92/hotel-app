@@ -1,0 +1,10 @@
+.inv-mess {
+    font-size: small;
+    color:crimson;
+    background-color: rgb(242, 244, 246);
+    width: fit-content;
+    padding: 0.5%;
+    border-radius: 5px;
+    border: 1px solid white;
+    margin: 0.5%;
+}

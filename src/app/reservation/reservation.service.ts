@@ -16,4 +16,11 @@ export class ReservationService {
     return this.reservations.find(res => res.id == id);
   } 
 
+  addReservation(reservation : Reservation): void{
+    this.reservations.push(reservation);
+  } 
+
+  deleteReservation(id: string): void{
+    
+  }
 }

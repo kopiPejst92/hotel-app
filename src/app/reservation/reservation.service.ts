@@ -21,7 +21,7 @@ export class ReservationService {
   } 
 
   deleteReservation(id: string): void{
-    let index=this.reservations.findIndex(res=>res.id==id);
+    let index=this.reservations.findIndex(res=>res.id===id);
     this.reservations.splice(index,1)
   }
 }

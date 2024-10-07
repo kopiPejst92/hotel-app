@@ -1,33 +1,68 @@
 <app-home></app-home>
 <div class="container">
-    <h4>Reservation list</h4>
-    <div>
-        <ul  class="list-group" style="list-style:none;" *ngIf="reservations.length; else noReservation">
-            <div class="row">
-                <div class="col list-group-item">Guest Name</div>
-                <div class="col list-group-item">E-mail</div>
-                <div class="col list-group-item">Check-In</div>
-                <div class="col list-group-item">Check-Out</div>
-                <div class="col list-group-item">Room Number</div>
-                <div class="col list-group-item"></div>
+        <div class="panel">
+            <div class="panel-heading">
+                <h5>Reservation list</h5>
             </div>
-            <li *ngFor="let reservation of reservations">
-                <div class="row">
-                    <div class="col list-group-item">{{reservation.guestName}}</div>
-                    <div class="col list-group-item">{{reservation.guestEmail}}</div>
-                    <div class="col list-group-item">{{reservation.checkInDate}}</div>
-                    <div class="col list-group-item">{{reservation.checkOutDate}}</div>
-                    <div class="col list-group-item">{{reservation.roomNumber}}</div>
-                    <div class="col list-group-item">
-                        <button class="btn btn-danger" (click)="deleteReservation(reservation.id)">x</button>
-                        <button class="btn btn-primary" [routerLink]="['/edit', reservation.id]">Edit</button>
-                    </div>
+            <div class="panel-body table-responsive">
+                <table class="res-list" *ngIf="reservations.length; else noReservation">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>E-mail</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Room number</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let reservation of reservations">
+                            <td>{{reservation.guestName}}</td>
+                            <td>{{reservation.guestEmail}}</td>
+                            <td>{{reservation.checkInDate}}</td>
+                            <td>{{reservation.checkOutDate}}</td>
+                            <td class="roomNo">{{reservation.roomNumber}}</td>
+                            <td>
+                                <ul class="action-list">
+                                    <li><button class="btn btn-danger" (click)="deleteReservation(reservation.id)">x</button></li>
+                                    <li><button class="btn btn-primary" [routerLink]="['/edit', reservation.id]">Edit</button></li>
+                                </ul>
+                            </td>
+                    </tbody>
+                </table>
             </div>
-            </li>
-        </ul>
-    </div>
 
-    <ng-template #noReservation>
-        <p>No reservations are available</p>
-    </ng-template>
+            <ng-template #noReservation>
+                <div class="no-res">No reservations are available</div>
+            </ng-template>
+    </div>
 </div>
+
+
+<!-- 
+
+<ul style="list-style:none;" *ngIf="reservations.length; else noReservation">
+    <div class="row">
+        <div class="col">Guest Name</div>
+        <div class="col">E-mail</div>
+        <div class="col">Check-In</div>
+        <div class="col">Check-Out</div>
+        <div class="col">Room Number</div>
+        <div class="col"></div>
+    </div>
+    <li *ngFor="let reservation of reservations">
+        <div class="row">
+            <div class="col">{{reservation.guestName}}</div>
+            <div class="col">{{reservation.guestEmail}}</div>
+            <div class="col">{{reservation.checkInDate}}</div>
+            <div class="col">{{reservation.checkOutDate}}</div>
+            <div class="col">{{reservation.roomNumber}}</div>
+            <div class="col">
+                <button class="btn btn-danger" (click)="deleteReservation(reservation.id)">x</button>
+                <button class="btn btn-primary" [routerLink]="['/edit', reservation.id]">Edit</button>
+            </div>
+    </div>
+    </li>
+</ul>
+</div> -->

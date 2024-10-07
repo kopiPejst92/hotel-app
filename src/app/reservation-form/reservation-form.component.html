@@ -1,22 +1,22 @@
 <app-home></app-home>
-<div class="container">
+<div class="container" style="max-width: 40%;">
     <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
-        <div class="mb-3">
-            <label class="form-label">Check-in Date</label>
+        <div class="my-3">
+            <label>Check-in Date</label>
             <input class="form-control"  type="date" formControlName="checkInDate">
             <div class="inv-mess"
                 *ngIf="reservationForm.get('checkInDate')?.invalid && reservationForm.get('checkInDate')?.touched">
                 Check-In
                 Date is required</div>
         </div>
-        <div>
+        <div class="my-3">
             <label>Check-out Date</label>
             <input  class="form-control" type="date" formControlName="checkOutDate">
             <div class="inv-mess"
                 *ngIf="reservationForm.get('checkOutDate')?.invalid && reservationForm.get('checkOutDate')?.touched">
                 Check-Out Date is required</div>
         </div>
-        <div>
+        <div class="my-3">
             <label>Guest Name</label>
             <input  class="form-control" type="text" formControlName="guestName">
             <div class="inv-mess"
@@ -24,7 +24,7 @@
                 required</div>
 
         </div>
-        <div>
+        <div class="my-3">
             <label>Guest E-mail</label>
             <input class="form-control" type="email" formControlName="guestEmail">
             <div class="inv-mess"
@@ -32,10 +32,10 @@
                 E-mail is required</div>
 
         </div>
-        <div>
+        <div class="my-3">
             <label>Room Number</label>
             <input  class="form-control" type="number" formControlName="roomNumber">
         </div>
-        <button class="btn btn-primary" type="submit" [disabled]="reservationForm.invalid">Submit</button>
+        <button class="btn btn-primary my-3" type="submit" [disabled]="reservationForm.invalid">Submit</button>
     </form>
 </div>

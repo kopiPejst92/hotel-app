@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Reservation } from '../models/reservation';
 
 @Injectable({
@@ -6,31 +8,28 @@ import { Reservation } from '../models/reservation';
 })
 export class ReservationService {
 
+  private apiUrl = "http://localhost:3000"
   private reservations: Reservation[] = [];
 
-  getReservations(): Reservation[] {
-    return this.reservations;
+  constructor(private http: HttpClient) { }
+
+  getReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(this.apiUrl + "/reservations")
   }
 
-  getReservation(id: number): Reservation | undefined {
-    return this.reservations.find(res => res.id === id);
+  getReservation(id: number): Observable<Reservation> {
+    return this.http.get<Reservation>(this.apiUrl + "/reservation/"+id);
   }
 
-  addReservation(reservation: Reservation): void {
-    let lastElementIndex = this.reservations.length ? this.reservations[this.reservations.length - 1].id : 0;
-    reservation.id = lastElementIndex + 1;
-    this.reservations.push(reservation);
-    console.log(this.reservations);
+  addReservation(reservation: Reservation):  Observable<void> {
+    return this.http.post<void>(this.apiUrl + "/reservation", reservation);
   }
 
-  deleteReservation(id: number): void {
-    let index = this.reservations.findIndex(res => res.id === id);
-    this.reservations.splice(index, 1);
-    console.log(this.reservations);
+  deleteReservation(id: number): Observable<void> {
+    return this.http.delete<void>(this.apiUrl + "/reservation/"+id);
   }
 
-  editReservation(id: number, modifiedReservation: Reservation): void {
-    let index = this.reservations.findIndex(res => res.id === id);
-    this.reservations[index] = modifiedReservation;
+  editReservation(id: number, modifiedReservation: Reservation):  Observable<void> {
+    return this.http.put<void>(this.apiUrl + "/reservation/"+id, modifiedReservation);
   }
 }

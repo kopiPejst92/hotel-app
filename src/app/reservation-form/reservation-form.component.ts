@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ReservationService } from '../reservation/reservation.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Reservation } from '../models/reservation';
-import { Router, ActivatedRoute } from '@angular/router'
+import { ReservationService } from '../reservation/reservation.service';
 
 @Component({
   selector: 'app-reservation-form',
@@ -11,17 +11,17 @@ import { Router, ActivatedRoute } from '@angular/router'
 })
 export class ReservationFormComponent implements OnInit {
   reservationForm: FormGroup = new FormGroup({});
-  
+
   constructor(private formBuilder: FormBuilder,
-              private reservationService : ReservationService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute
-            ){
+    private reservationService: ReservationService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
 
   }
 
   ngOnInit(): void {
-    this.reservationForm=this.formBuilder.group({
+    this.reservationForm = this.formBuilder.group({
       checkInDate: ['', Validators.required],
       checkOutDate: ['', Validators.required],
       guestName: ['', Validators.required],
@@ -30,26 +30,31 @@ export class ReservationFormComponent implements OnInit {
     })
 
     let id = this.activatedRoute.snapshot.paramMap.get('id')
-    
-    if(id){
-      let reservation = this.reservationService.getReservation(Number(id))
-      if(reservation)
-        this.reservationForm.patchValue(reservation)
+
+    if (id) {
+      this.reservationService.getReservation(Number(id)).subscribe(reservation => {
+        if (reservation)
+          this.reservationForm.patchValue(reservation)
+      })
     }
   }
 
   onSubmit(): void {
-    if(this.reservationForm.valid){
-      let reservation : Reservation = this.reservationForm.value
+    if (this.reservationForm.valid) {
+      let reservation: Reservation = this.reservationForm.value
       let id = this.activatedRoute.snapshot.paramMap.get('id')
-      if(id){
-        reservation.id=Number(id)
-        this.reservationService.editReservation(Number(id), reservation)
-      }else{
-        this.reservationService.addReservation(reservation);
- 
+      if (id) {
+        reservation.id = Number(id)
+        this.reservationService.editReservation(Number(id), reservation).subscribe(() => {
+          console.log("Reservation has been modified")
+        })
+      } else {
+        this.reservationService.addReservation(reservation).subscribe(() => {
+          console.log("Reservation has been added")
+        });
+
       }
       this.router.navigate(['/list'])
-      }
+    }
   }
 }

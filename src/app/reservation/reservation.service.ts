@@ -22,7 +22,7 @@ export class ReservationService {
   }
 
   addReservation(reservation: Reservation): void {
-    let lastElementIndex = this.reservations ? this.reservations[this.reservations.length-1].id: 0;
+    let lastElementIndex = this.reservations.length ? this.reservations[this.reservations.length-1].id: 0;
     reservation.id=lastElementIndex + 1;
     this.reservations.push(reservation);
     console.log(this.reservations);

@@ -45,11 +45,10 @@ export class ReservationFormComponent implements OnInit {
       if(id){
         reservation.id=Number(id)
         this.reservationService.editReservation(Number(id), reservation)
-
       }else{
         this.reservationService.addReservation(reservation);
+ 
       }
-
       this.router.navigate(['/list'])
       }
   }

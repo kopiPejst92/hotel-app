@@ -1,7 +1,7 @@
-.panel{
+.panel {
     background: linear-gradient(to right, #2980b9, #2c3e50);
     color: aliceblue;
-    font-size:15px;
+    font-size: 15px;
     border: none;
     border-radius: 10px;
     width: 80%;
@@ -9,11 +9,11 @@
     align-items: center;
 }
 
-.panel-heading{
+.panel-heading {
     padding: 20px 15px;
 }
 
-.table-responsive{
+.table-responsive {
     overflow-x: auto;
 }
 
@@ -27,38 +27,37 @@ thead tr th {
     border: none;
 }
 
-.panel .panel-body .res-list tbody tr:nth-child(2n){
-    background-color: rgba(255,255,255,0.05);
+.panel .panel-body .res-list tbody tr:nth-child(2n) {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
-td{
+td {
     padding: 10px;
 }
-td .action-list{
+
+td .action-list {
     padding-left: 1px;
 }
 
-.action-list{
-    list-style:none;
+.action-list {
+    list-style: none;
 }
 
-.action-list li{
-   float:right;
+.action-list li {
+    float: right;
 }
 
-.btn{
+.btn {
     font-size: 14px;
     margin-left: 5px;
 }
 
-td.roomNo{
-    width:5%;
+td.roomNo {
+    width: 5%;
     text-align: center;
 }
 
-.no-res{
+.no-res {
     padding: 50px;
-    font-size: 12px;
-    text-align: center
-    ;
+    text-align: center;
 }

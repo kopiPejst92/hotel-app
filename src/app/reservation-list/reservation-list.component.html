@@ -1,41 +1,43 @@
 <app-home></app-home>
 <div class="container">
-        <div class="panel">
-            <div class="panel-heading">
-                <h5>Reservation list</h5>
-            </div>
-            <div class="panel-body table-responsive">
-                <table class="res-list" *ngIf="reservations.length; else noReservation">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>E-mail</th>
-                            <th>Check-in</th>
-                            <th>Check-out</th>
-                            <th>Room number</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let reservation of reservations">
-                            <td>{{reservation.guestName}}</td>
-                            <td>{{reservation.guestEmail}}</td>
-                            <td>{{reservation.checkInDate}}</td>
-                            <td>{{reservation.checkOutDate}}</td>
-                            <td class="roomNo">{{reservation.roomNumber}}</td>
-                            <td>
-                                <ul class="action-list">
-                                    <li><button class="btn btn-danger" (click)="deleteReservation(reservation.id)">x</button></li>
-                                    <li><button class="btn btn-primary" [routerLink]="['/edit', reservation.id]">Edit</button></li>
-                                </ul>
-                            </td>
-                    </tbody>
-                </table>
-            </div>
+    <div class="panel">
+        <div class="panel-heading">
+            <h5>Reservation list</h5>
+        </div>
+        <div class="panel-body table-responsive">
+            <table class="res-list" *ngIf="reservations.length; else noReservation">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>E-mail</th>
+                        <th>Check-in</th>
+                        <th>Check-out</th>
+                        <th>Room number</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let reservation of reservations">
+                        <td>{{reservation.guestName}}</td>
+                        <td>{{reservation.guestEmail}}</td>
+                        <td>{{reservation.checkInDate}}</td>
+                        <td>{{reservation.checkOutDate}}</td>
+                        <td class="roomNo">{{reservation.roomNumber}}</td>
+                        <td>
+                            <ul class="action-list">
+                                <li><button class="btn btn-danger"
+                                        (click)="deleteReservation(reservation.id)">x</button></li>
+                                <li><button class="btn btn-primary"
+                                        [routerLink]="['/edit', reservation.id]">Edit</button></li>
+                            </ul>
+                        </td>
+                </tbody>
+            </table>
+        </div>
 
-            <ng-template #noReservation>
-                <div class="no-res">No reservations are available</div>
-            </ng-template>
+        <ng-template #noReservation>
+            <div class="no-res">No available reservations</div>
+        </ng-template>
     </div>
 </div>
 
